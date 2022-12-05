@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Table(name="board_table")
-public class BoardEntity {
+public class BoardEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +29,7 @@ public class BoardEntity {
     private String boardContents;
 
     @Column
-    private int hits;
+    private int boardHits;
 
     public static BoardEntity toSaveEntity(BoardDTO boardDTO){
         BoardEntity boardEntity = new BoardEntity();
@@ -37,6 +37,7 @@ public class BoardEntity {
         boardEntity.setBoardWriter(boardDTO.getBoardWriter());
         boardEntity.setBoardPass(boardDTO.getBoardPass());
         boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardHits(0);
         return boardEntity;
     }
 
