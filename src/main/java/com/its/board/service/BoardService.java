@@ -6,6 +6,7 @@ import com.its.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,4 +38,10 @@ public class BoardService {
         }
 
     }
+
+    @Transactional
+    public int updateView(Long id) {
+        return boardRepository.updateView(id);
+    }
+
 }

@@ -44,6 +44,7 @@ public class BoardController {
     @GetMapping("/{id}")
     public String boardFind(@PathVariable Long id,Model model){
         BoardDTO boardDTO = boardService.findById(id);
+        boardService.updateView(id);
         model.addAttribute("board", boardDTO);
         return "boardPages/boardDetail";
     }
