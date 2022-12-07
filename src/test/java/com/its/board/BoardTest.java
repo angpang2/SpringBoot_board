@@ -1,6 +1,8 @@
 package com.its.board;
 
 import com.its.board.dto.BoardDTO;
+import com.its.board.entity.BoardEntity;
+import com.its.board.repository.BoardRepository;
 import com.its.board.service.BoardService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,6 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BoardTest {
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private BoardRepository boardRepository;
     @Test
     @Transactional
     @Rollback
@@ -84,5 +89,18 @@ public class BoardTest {
 //        });
 //
 //    }
+    @Test
+    @Transactional
+    @DisplayName("연관관계 조회 테스트")
+    public void findTest(){
+        //파일이 첨부된 게시글 조회
+        BoardEntity boardEntity = boardRepository.findById(118L).get();
+        //첨부파일의 originalFileName 조회
+        System.out.println("boardEntity.getBoardFileEntityList().get(0).getOriginalFileName();"+boardEntity.getBoardFileEntityList().get(0).getOriginalFileName());
+        // native query
+
+
+
+    }
 
 }

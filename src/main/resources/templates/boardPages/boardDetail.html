@@ -65,6 +65,12 @@
       <td th:text="${board.boardContents}"></td>
     </tr>
 
+    <tr th:if="${board.fileAttached == 1}">
+      <th>첨부파일</th>
+      <td>
+        <img th:src="@{|/upload/${board.storedFileName}|}" alt="" width="100px" height="100px">
+      </td>
+    </tr>
   </table>
   <button class="btn btn-primary" th:href="@{/board/}">목록</button>
   <button class="btn btn-primary" onclick="updateReq()">수정</button>
