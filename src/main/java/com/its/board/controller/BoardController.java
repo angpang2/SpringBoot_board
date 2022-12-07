@@ -50,4 +50,27 @@ public class BoardController {
     }
 
 
+    @GetMapping("/update/{id}")
+    public String boardUpdatePage(@PathVariable Long id,Model model){
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "boardPages/boardUpdate";
+    }
+
+    @PostMapping("/update")
+    public String boardUpdate(@ModelAttribute BoardDTO boardDTO){
+        System.out.println("boardDTO = " + boardDTO);
+        boardService.update(boardDTO);
+        return "redirect:/board/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        boardService.delete(id);
+        return "redirect:/board/";
+    }
+
+
+
+
 }

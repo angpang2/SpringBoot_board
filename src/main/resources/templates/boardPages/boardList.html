@@ -20,19 +20,19 @@
         </tr>
         <tr th:each="board: ${boardList}">
             <td th:text="${board.id}"></td>
-            <td th:text="${board.boardTitle}"></td>
+            <td>
+                <a th:href="@{|/board/${board.id}|}"> <h6 th:text="${board.boardTitle}"> </h6></a>
+            </td>
             <td th:text="${board.boardWriter}"></td>
             <td th:text="*{#temporals.format(board.boardCreatedTime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${board.boardHits}"></td>
-            <td>
-                <a th:href="@{|/board/${board.id}|}">조회</a>
-            </td>
             <td>
                 <a th:href="@{|/board/delete/${board.id}|}">삭제</a>
             </td>
         </tr>
     </table>
 </div>
+<a href="/">홈으로</a>
 
 
 

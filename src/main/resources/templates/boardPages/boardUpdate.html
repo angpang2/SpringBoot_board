@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jqury.js}"></script>
+</head>
+<body>
+<form action="/board/update" method="post">
+    <input type="hidden" name="boardPass" th:value="${board.boardPass}">
+    <input type="hidden" name="boardHits" th:value="${board.boardHits}">
+    id: <input type="text" name="id" th:value="${board.id}" class="form-control" readonly>
+    작성자: <input type="text" name="boardWriter" th:value="${board.boardWriter}" class="form-control">
+    제목: <input type="text" name="boardTitle" th:value="${board.boardTitle}" class="form-control">
+    내용: <input type="text" name="boardContents" th:value="${board.boardContents}" class="form-control">
+    <input type="submit" value="수정" class="btn btn-warning">
+</form>
+<a href="/board/">리스트로</a>
+</body>
+</html>

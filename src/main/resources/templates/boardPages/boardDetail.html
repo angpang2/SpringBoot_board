@@ -4,6 +4,42 @@
   <meta charset="UTF-8">
   <title>detail</title>
   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <style>
+    #modal{
+      display : none;
+      z-index : 1;
+      background-color: rgba(0,0,0,.3);
+      position:fixed;
+      left:0;
+      top: 0;
+      width:100%;
+      height:100%;
+
+    }
+    #modal>#content{
+      width:300px;
+      margin:100px auto;
+      padding:20px;
+      position: relative;
+      background-color:#fff;
+    }
+
+    #modal .close{
+      position:absolute;
+      top:4px;
+      right:4px;
+      font-size:20px;
+      border:0;
+      background-color: #fff;
+    }
+
+    #modal .close:hover,
+    #modal .close:focus {
+      color : #000;
+      text-decoration: none;
+      cursor :pointer;
+    }
+  </style>
 
 </head>
 <body>
@@ -27,7 +63,87 @@
     </tr>
 
   </table>
+  <button class="btn btn-primary" th:href="@{/board/}">목록</button>
+  <button class="btn btn-primary" onclick="updateReq()">수정</button>
+  <input type='button' value='수정2' id='btnOpen' class="btn btn-secondary">
+    <button class="btn btn-primary" onclick="deleteReq()">삭제</button>
   <a href="/board/">리스트로</a>
 </div>
+
+
+
+<div id='modal'>
+  <div id='content'>
+    <input type='button' value='X' class="close" id='btnClose'/>
+    <label>암호를 입력하세요</label><br/>
+    <input type='password' id='pwd'/>
+    <input type='button' value='check' id='btnCheck' />
+  </div>
+</div>
 </body>
+<script th:inline="javascript">
+  const btnOpen  = document.getElementById('btnOpen');
+  const btnCheck = document.getElementById('btnCheck');
+  const btnClose = document.getElementById('btnClose');
+
+  // modal 창을 감춤
+  const closeRtn = function(){
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+
+  }
+
+  // modal 창을 보여줌
+  btnOpen.onclick = function(){
+    const modal = document.getElementById('modal');
+    modal.style.display = 'block';
+
+  }
+
+  btnClose.onclick = closeRtn;
+  btnCheck.onclick = function (){
+    const boardPass2 = [[${board.boardPass}]];
+    const boardPass = document.getElementById("pwd").value;
+    const id = [[${board.id}]];
+    if(boardPass == boardPass2){
+      alert("비밀번호일치")
+      location.href = "/board/update/"+id
+    }else {
+      confirm("비밀번호를 확인해주세요")
+    }
+
+  }
+
+
+
+
+
+
+  const updateReq = () => {
+    const boardPass = [[${board.boardPass}]];
+    const boardPass2 = prompt("(비밀번호를 입력하시오)");
+    const id = [[${board.id}]];
+    console.log(boardPass)
+    console.log(boardPass2)
+    if (boardPass == boardPass2){
+      location.href = "/board/update/"+id
+    }else {
+      confirm("비밀번호를 확인해주세요")
+    }
+
+  }
+
+  const deleteReq = () => {
+    const boardPass = [[${board.boardPass}]];
+    const boardPass2 = prompt("(비밀번호를 입력하시오)");
+    const id = [[${board.id}]];
+    console.log(boardPass)
+    console.log(boardPass2)
+    if (boardPass == boardPass2){
+      location.href = "/board/delete/"+id
+    }else {
+      confirm("비밀번호를 확인해주세요")
+    }
+  }
+</script>
 </html>

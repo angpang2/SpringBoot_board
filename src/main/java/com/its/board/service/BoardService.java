@@ -5,8 +5,8 @@ import com.its.board.entity.BoardEntity;
 import com.its.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +41,15 @@ public class BoardService {
 
     @Transactional
     public int updateView(Long id) {
-        return boardRepository.updateView(id);
+        return boardRepository.updateHits(id);
     }
 
+    public void update(BoardDTO boardDTO) {
+        BoardEntity updateEntity = BoardEntity.toUpdateEntity(boardDTO);
+        boardRepository.save(updateEntity);
+    }
+
+    public void delete(Long id) {
+        boardRepository.deleteById(id);
+    }
 }
