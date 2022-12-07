@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -22,7 +24,7 @@ public class BoardTest {
     @Transactional
     @Rollback
     @DisplayName("글작성 테스트")
-    public void boardSaveTest(){
+    public void boardSaveTest() throws IOException {
         BoardDTO boardDTO = newBoard();
         Long saveId=boardService.save(boardDTO);
         BoardDTO boardDTO1 = boardService.findById(saveId);
@@ -33,7 +35,7 @@ public class BoardTest {
     @Transactional
     @Rollback
     @DisplayName("글목록 테스트")
-    public void boardListTest(){
+    public void boardListTest() throws IOException {
         BoardDTO boardDTO = newBoard();
         boardService.save(boardDTO);
         List<BoardDTO> boardDTOList = boardService.findAll();
@@ -44,7 +46,7 @@ public class BoardTest {
     @Transactional
     @Rollback
     @DisplayName("글상세보기 테스트")
-    public void boardDetailTest(){
+    public void boardDetailTest() throws IOException {
         BoardDTO boardDTO = newBoard();
         Long saveId=boardService.save(boardDTO);
         BoardDTO boardDTO1 = boardService.findById(saveId);

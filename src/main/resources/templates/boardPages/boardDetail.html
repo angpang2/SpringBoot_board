@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>detail</title>
   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<!--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+  <script th:src="@{/js/axios.min.js}"></script>
+
   <style>
     #modal{
       display : none;
@@ -114,11 +117,6 @@
 
   }
 
-
-
-
-
-
   const updateReq = () => {
     const boardPass = [[${board.boardPass}]];
     const boardPass2 = prompt("(비밀번호를 입력하시오)");
@@ -145,5 +143,9 @@
       confirm("비밀번호를 확인해주세요")
     }
   }
+
+
+
+
 </script>
 </html>

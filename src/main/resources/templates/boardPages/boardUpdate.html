@@ -5,9 +5,11 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/jqury.js}"></script>
+    <script th:src="@{/js/axios.min.js}"></script>
+
 </head>
 <body>
-<form action="/board/update" method="post">
+<!--<form action="/board/update" method="post">-->
     <input type="hidden" name="boardPass" th:value="${board.boardPass}">
     <input type="hidden" name="boardHits" th:value="${board.boardHits}">
     id: <input type="text" name="id" th:value="${board.id}" class="form-control" readonly>
@@ -15,7 +17,45 @@
     제목: <input type="text" name="boardTitle" th:value="${board.boardTitle}" class="form-control">
     내용: <input type="text" name="boardContents" th:value="${board.boardContents}" class="form-control">
     <input type="submit" value="수정" class="btn btn-warning">
-</form>
+    <button class="btn btn-primary" onclick="boardUpdateAxios()">수정(axios)</button>
+<!--</form>-->
+<a href="/">홈으로</a>
 <a href="/board/">리스트로</a>
 </body>
+<script>
+    const boardUpdateAxios = () => {
+        const id = document.querySelector('input[name="id"]').value;
+        const title = document.getElementsByName("boardTitle")[0].value;
+        const writer = document.querySelector('input[name="boardWriter"]').value;
+        const contents = document.querySelector('input[name="boardContents"]').value;
+        const pass = document.querySelector('input[name="boardPass"]').value;
+        const hits = document.querySelector('input[name="boardHits"]').value;
+        const passDB = [[${board.boardPass}]];
+        if(pass == passDB){
+            axios({
+                method: 'put',
+                url: '/board/'+id,
+                data: {
+                    id:id,
+                    boardTitle: title,
+                    boardWriter: writer,
+                    boardContents: contents,
+                    boardPass: pass,
+                    boardHits: hits
+                }
+            }).then(res => {
+                console.log("수정 성공")
+                // location.href = "/board/"+id;
+
+            }).catch(err => {
+                console.log("수정 실패")
+                alert("수정 실패")
+            })
+
+        } else {
+            alert("비밀번호를 확인해주세요")
+
+        }
+    }
+</script>
 </html>
